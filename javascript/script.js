@@ -1,16 +1,7 @@
-// CONFIGURAÇÕES
 const inicio = 9;
 const fim = 18;
 const intervalo = 30;
-const telefone = "5571985297554"; // SEU WHATSAPP
 
-// LISTA DE SERVIÇOS
-const servicos = {
-  30: "Corte simples",
-  60: "Corte + barba"
-};
-
-// GERA HORÁRIOS
 function gerarHorarios() {
   let horarios = [];
   for (let h = inicio * 60; h < fim * 60; h += intervalo) {
@@ -21,13 +12,13 @@ function gerarHorarios() {
   return horarios;
 }
 
-// CARREGA HORÁRIOS DISPONÍVEIS
 function carregarHorarios() {
   const data = document.getElementById("data").value;
   const duracao = parseInt(document.getElementById("servico").value);
   const select = document.getElementById("hora");
 
   select.innerHTML = '<option value="">Selecione o horário</option>';
+
   if (!data || !duracao) return;
 
   const agendados = JSON.parse(localStorage.getItem(data)) || [];
@@ -52,13 +43,11 @@ function carregarHorarios() {
   });
 }
 
-// AGENDAR
 function agendar() {
   const nome = document.getElementById("nome").value;
   const data = document.getElementById("data").value;
   const hora = document.getElementById("hora").value;
   const duracao = parseInt(document.getElementById("servico").value);
-  const nomeServico = servicos[duracao];
 
   if (!nome || !data || !hora || !duracao) {
     alert("Preencha todos os campos");
@@ -77,15 +66,15 @@ function agendar() {
 
   localStorage.setItem(data, JSON.stringify(agendados));
 
-  const mensagem =
-    `📅 *Novo Agendamento*%0A%0A` +
-    `👤 Cliente: ${nome}%0A` +
-    `✂️ Serviço: ${nomeServico}%0A` +
-    `⏱️ Duração: ${duracao} minutos%0A` +
-    `📆 Data: ${data}%0A` +
-    `🕒 Horário: ${hora}`;
+  const msg =
+    `Novo agendamento:%0A%0A` +
+    `Nome: ${nome}%0A` +
+    `Serviço: ${duracao} minutos%0A` +
+    `Data: ${data}%0A` +
+    `Horário: ${hora}`;
 
-  window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
+  const telefone = "5571985297554"; // SEU WHATSAPP
+  window.open(`https://wa.me/${telefone}?text=${msg}`, "_blank");
 
   alert("Horário agendado com sucesso!");
   carregarHorarios();
