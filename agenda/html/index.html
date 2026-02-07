@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Agendamento</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="box">
+  <h2>Agendar Horário</h2>
+
+  <input type="text" id="nome" placeholder="Seu nome">
+
+  <select id="servico" onchange="carregarHorarios()">
+    <option value="">Escolha o serviço</option>
+    <option value="30">Corte simples (30 min)</option>
+    <option value="60">Corte + barba (1 hora)</option>
+  </select>
+
+  <input type="date" id="data" onchange="carregarHorarios()">
+
+  <select id="hora">
+    <option value="">Selecione o horário</option>
+  </select>
+
+  <button onclick="agendar()">Agendar</button>
+</div>
+
+<script src="../javascript/script.js"></script>
+</body>
+</html>
